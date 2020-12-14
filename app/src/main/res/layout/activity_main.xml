@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!--
+    slideranimation duration is to set duration for transition between two slides
+    sliderautocycledirection is to set animationbetween transition of your slides
+    sliderindicator enables is used to display the indicators for slider
+    slider indicator gravity is to set gravity for indicator gravity
+    slider indicator margin is to set margin for indicator
+    slider indicator orientation is used to add orientation for slider
+    slider indicator padding is use to add padding to indicator
+    slider indicator selected color is use to specify selected color
+    and slider indicator unselected color is use to specify the color when the slider is unselected
+    slider scroll time in sec is used to specify scrolling time in seconds
+     -->
+
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:sliderAnimationDuration="600"
+        android:layout_centerInParent="true"
+        app:sliderAutoCycleDirection="back_and_forth"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderIndicatorEnabled="true"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderScrollTimeInSec="1" />
+
+
+</RelativeLayout>
