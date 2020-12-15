@@ -25,6 +25,5 @@ public class MainActivity2 extends AppCompatActivity {
         // below methods are used for adding enter and exit transition.
         getWindow().setEnterTransition(fade);
         getWindow().setExitTransition(fade);
-
     }
 }

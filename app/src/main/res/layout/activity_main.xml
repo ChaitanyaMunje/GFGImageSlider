@@ -1,27 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.jmedeisis.draglinearlayout.DragLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--Transition name is a simple string that will be given
-    to two views between which we are applying transition-->
+    <!--Parent layout is a Draglinearlayout
+        whose orientation is vertical and
+        we have to provide id to it.
+        -->
 
-    <!--Transition name should be same for both the views in which we
-    are making transition-->
-
+    <!--below is a simple image view -->
     <ImageView
-        android:id="@+id/image"
-        android:layout_width="180dp"
+        android:id="@+id/idIVlogo"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
         android:contentDescription="@string/image_desc"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="120dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/gfgimage"
-        android:transitionName="fade" />
+        android:src="@drawable/gfgimage" />
 
-</RelativeLayout>
+    <!--below is the simple text view-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:padding="20dp"
+        android:text="@string/geeks_for_geeks"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!--below is the simple text view-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:padding="10dp"
+        android:text="@string/dsa_course"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+</com.jmedeisis.draglinearlayout.DragLinearLayout>
