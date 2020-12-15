@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">GFG PDF Viewer</string>
+    <string name="app_name">GFG App</string>
+    <string name="image_desc">image</string>
 </resources>

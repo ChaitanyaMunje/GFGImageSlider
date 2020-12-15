@@ -1,70 +1,54 @@
 package com.gtappdevelopers.autoimageslider;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Fade;
+import android.view.View;
+import android.widget.ImageView;
 
-import com.github.barteksc.pdfviewer.PDFView;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    //creating a variable for PDF view.
-    PDFView pdfView;
-    //url of our PDF file.
-    String pdfurl="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //initializing our pdf view.
-        pdfView = findViewById(R.id.idPDFView);
-        new RetrivePDFfromUrl().execute(pdfurl);
 
-    }
+        //we are adding fade animation between two imageviews.
+        Fade fade = new Fade();
+        View decor = getWindow().getDecorView();
+        //below 3 lines of code is to exclude action bar,title bar and navigation bar from animation.
+        fade.excludeTarget(decor.findViewById(R.id.action_bar_container), true);
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+        //we are adding fade animaion for enter transition.
+        getWindow().setEnterTransition(fade);
+        //we are also setting fade animation for exit transition.
+        getWindow().setExitTransition(fade);
+        //initializing our imageview.
+        final ImageView imageView = findViewById(R.id.image);
 
-    //create an async task class for loading pdf file from URL.
-    class RetrivePDFfromUrl extends AsyncTask<String, Void, InputStream> {
-
-        @Override
-        protected InputStream doInBackground(String... strings) {
-            //we are using inputstream for getting out PDF.
-            InputStream inputStream = null;
-            try {
-                URL url = new URL(strings[0]);
-                // below is the step where we are creating our connection.
-                HttpURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
-                if (urlConnection.getResponseCode() == 200) {
-                    //response is success.
-                    //we are getting input stream from url and storing it in our variable.
-                    inputStream = new BufferedInputStream(urlConnection.getInputStream());
-
-                }
-
-            } catch (IOException e) {
-                //this is the method to handle errors.
-                e.printStackTrace();
-                return null;
+        //setting on click listner for our imageview.
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // on image click we are opening new activity and adding animation between this two activities.
+                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                //below method is used to make scene transition and adding fade animation in it.
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        MainActivity.this, imageView, ViewCompat.getTransitionName(imageView));
+                // starting our activity with below method.
+                startActivity(intent, options.toBundle());
             }
-
-            return inputStream;
-        }
-
-        @Override
-        protected void onPostExecute(InputStream inputStream) {
-            // after the execution of our async task we are loading our pdf in our pdf view.
-            pdfView.fromStream(inputStream).load();
-
-        }
+        });
     }
+
 
 }
